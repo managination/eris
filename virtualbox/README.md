@@ -25,6 +25,7 @@ From now on use eris.managination.com:33389 as connection string for your RDP cl
 
 # How to configure Remote Desktop Access
 To configure remote access, follow these steps:
+
 1. In Control Panel, click System And Security, and then click System.
 2. On the System page, click Remote Settings in the left pane. This opens the System Properties dialog box to the Remote tab.
 3. To disable Remote Desktop, select Don’t Allow Connections To This Com¬puter, and then click OK.Skip the remaining steps.
@@ -46,5 +47,5 @@ VBoxManage controlvm Win7Pro_Eris poweroff
 # all VMs
 VBoxManage list vms 
 # only running VMs
-VBoxManage list vms --running
+VBoxManage list runningvms
 ```

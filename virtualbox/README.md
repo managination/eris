@@ -39,9 +39,13 @@ To configure remote access, follow these steps:
 
 # How to shutdow the VM
 ## Normal shutdown (like if you have pressed power button)
+```bash
 VBoxManage controlvm Win7Pro_Eris acpipowerbutton
+```
 ## Poweroff (like if you pull out the power plug out of socket)
+```bash
 VBoxManage controlvm Win7Pro_Eris poweroff
+```
 # How to get the list of VM instances
 ```bash
 # all VMs

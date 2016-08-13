@@ -13,15 +13,7 @@ VBoxManage modifyvm Win7Pro_Eris --vrde on
 # start VM
 VBoxManage startvm Win7Pro_Eris --type headless
 ```
-Now you can use any RDP client to connect to eris.managination.com and complete windows install.
-After that log into system and [configure RDP access](#how-to-configure-remote-desktop-access).
-Next, shutdown VM and disable VRDE for sake of security:
-```bash
-VBoxManage modifyvm Win7Pro_Eris --vrde off
-# Start VM once again
-VBoxManage startvm Win7Pro_Eris --type headless
-```
-From now on use eris.managination.com:33389 as connection string for your RDP client (this template has PAT (port NAT) configured: port 3389 (RDP) on VM is mapped to port 33389 on host server)
+Use eris.managination.com:3389 as connection string for your RDP client.
 
 # How to configure Remote Desktop Access
 To configure remote access, follow these steps:

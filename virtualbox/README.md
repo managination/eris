@@ -1,4 +1,9 @@
-# How to create a new windows7 VM from template
+# How to import VM from exported image
+```bash
+cd /home/mroon/vbox_images
+VBoxManage ^Cport -n Win7Pro_Eris.ovf
+```
+# How ot create a new windows7 VM from template
 ```bash
 # Copy VM template Win7Pro_Eris.ova to the virtualbox
 scp Win7Pro_Eris.ova.gz eris.managination.com:~/
@@ -44,4 +49,14 @@ VBoxManage controlvm Win7Pro_Eris poweroff
 VBoxManage list vms 
 # only running VMs
 VBoxManage list runningvms
+```
+# Make a copy of VM
+It is possible to make a clone of existing VM:
+```bash
+VBoxManage clonevm  Win7Pro_Eris --register --name Win7Pro_Eris_copy
+VBoxManage startvm Win7Pro_Eris_copy --type headless
+```
+# Delete VM
+```bash
+VBoxManage unregistervm Win7Pro_Eris_copy --delete
 ```

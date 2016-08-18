@@ -1,7 +1,7 @@
 # How to import VM from exported image
 ```bash
 cd /home/mroon/vbox_images
-VBoxManage ^Cport -n Win7Pro_Eris.ovf
+VBoxManage import -n Win7Pro_Eris.ovf
 ```
 # How ot create a new windows7 VM from template
 ```bash
@@ -59,4 +59,9 @@ VBoxManage startvm Win7Pro_Eris_copy --type headless
 # Delete VM
 ```bash
 VBoxManage unregistervm Win7Pro_Eris_copy --delete
+```
+# How to get VRDE port
+```bash
+$ VBoxManage showvminfo Win7Pro_Eris | grep 'VRDE port:'
+VRDE port:       3389
 ```

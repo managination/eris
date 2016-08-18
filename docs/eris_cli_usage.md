@@ -1,10 +1,10 @@
 # Adding new validator node
 Excerpts from [this tutorial](https://docs.erisindustries.com/tutorials/advanced/bond-unbond/)
-Creating the chain definition named "demo" with two Root accounts and one Full account
+Creating the blockchain named "simplechain" with two Root accounts and one Full account
 ```bash
 eris chains make --account-types=Root:2,Full:1 simplechain
 ```
-Now making a new chain definition "bonding" based on "simplechain" and create the first node
+Now making a new blockchain "bonding" based on "simplechain" and create the first node
 ```bash
 eris chains make --chain-type=simplechain bonding
 eris chains new bonding --dir ~/.eris/chains/bonding

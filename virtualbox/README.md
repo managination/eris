@@ -70,3 +70,11 @@ VRDE port:       3389
 ```bash
 VBoxManage guestproperty enumerate Win7Pro_Eris get /VirtualBox/GuestInfo/Net/0/V4/IP | awk '{gsub(/,/,""); print $4}'
 ```
+
+# CD/DVD insert
+```bash
+# Insert iso disk
+VBoxManage storageattach Win7Pro_Eris --storagectl SATA --port 1 --device 0 --medium /usr/share/virtualbox/VBoxGuestAdditions.iso  --type dvddrive
+# Remove iso disk
+VBoxManage storageattach Win7Pro_Eris --storagectl SATA --port 1 --device 0 --medium none --type dvddrive
+```

@@ -1,7 +1,7 @@
 # How to import VM from exported image
 ```bash
 cd /home/mroon/vbox_images
-VBoxManage import -n Win7Pro_Eris.ovf
+VBoxManage import Win7Pro_Eris.ovf
 ```
 # How ot create a new windows7 VM from template
 ```bash

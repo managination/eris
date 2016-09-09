@@ -65,3 +65,8 @@ VBoxManage unregistervm Win7Pro_Eris_copy --delete
 $ VBoxManage showvminfo Win7Pro_Eris | grep 'VRDE port:'
 VRDE port:       3389
 ```
+
+# How to get ip of the VM
+```bash
+VBoxManage guestproperty enumerate Win7Pro_Eris get /VirtualBox/GuestInfo/Net/0/V4/IP | awk '{gsub(/,/,""); print $4}'
+```

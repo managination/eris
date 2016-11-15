@@ -1,4 +1,7 @@
 import { Random } from 'meteor/random'
+
+import { ChainTXs } from '../imports/api/common.js';
+
 fs = Npm.require( 'fs' );
 
 // Home directory where all fil
@@ -39,6 +42,11 @@ function getChainName(node) {
     chain = node.Info.Config.Env.filter(function(env_var){
         return env_var.startsWith('CHAIN_ID=') && !env_var.endsWith(node.ShortName);
     });
+    if (chain.length == 0) {
+        chain = node.Info.Config.Env.filter(function(env_var){
+            return env_var.startsWith('CHAIN_ID='); 
+        });
+    }
     chain = chain[0].split('=')[1];
     return chain
 }
@@ -52,6 +60,10 @@ function getAccounts() {
     logger.debug('Accounts: ' + accounts);
     return accounts;
 }
+
+Meteor.publish('ChainTXs', function() {
+    return ChainTXs.find();
+});
 
 Meteor.publish('chains', function() {
     let publication = this;
@@ -143,6 +155,8 @@ Meteor.publish('eris_node_types', function() {
 
     publication.ready();
 });
+
+///////////////////////////////////////////////////////////////////////////////
 
 Meteor.methods({
     'eris.chains.new'(name, chain, coins) {

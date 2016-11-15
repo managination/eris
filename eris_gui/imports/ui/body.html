@@ -1,0 +1,147 @@
+<body>
+<div class="container-fluid">
+    <header>
+        <h1>Eris GUI</h1>
+    </header>
+
+    {{> loginButtons}}
+
+    <div>
+        <h1>Nodes list</h1>
+        {{#each chains}}
+            {{> chain}}
+        {{/each}}
+        <div class="clearfix"></div>
+    </div>
+
+    {{> new_node}}
+
+    {{> new_blockchain}}
+
+    {{> eris_transactions}}
+</div>
+</body>
+
+
+<template name="chain">
+    <div id="chain-{{name}}" class="well pull-left" style="margin: 2px">
+        <h2>{{name}}</h2>
+        <ul class="list-unstyled">
+            {{#each nodes}}
+                {{> node}}
+            {{/each}}
+        </ul>
+    </div>
+</template>
+
+<template name="node">
+    <li>
+        <span class="glyphicon glyphicon-{{icon}}-circle" aria-hidden="true"></span>
+        {{#if rpc_port}}
+            <a href="http://{{gui_domain}}:{{rpc_port}}">{{name}} ({{state}})</a>
+        {{else}}
+            {{name}} ({{state}})
+        {{/if}}
+
+        {{#if isRunning state}}
+            <button class="btn btn-warning" name="stop" value="{{name}}">Stop</button>
+        {{else}}
+            <button class="btn btn-success" name="start" value={{name}}>Start</button>
+        {{/if}}
+        <button class="btn btn-danger" name="delete" value="{{name}}">Delete</button>
+    </li>
+</template>
+
+
+<template name="new_node">
+    <div>
+        <h1>Create a new eris node</h1>
+        <form id="new-node" class="form-inline">
+            <div class="form-group">
+                <label for="name">Node name</label>
+                <input type="text" class="form-control" id="name" placeholder="newnode">
+            </div>
+            <div class="form-group">
+                <label for="chain">Blockchain</label>
+                <input type="text" class="form-control" id="chain" placeholder="example_chain">
+            </div>
+            <div class="form-group">
+                <label for="coins">Coins amount</label>
+                <input type="text" class="form-control" id="coins" placeholder="200000">
+            </div>
+            <div class="form-group">
+                <label for="new_eris_node_type">Node type</label>
+                <select class="form-control text-capitalize">
+                    {{#each eris_node_types}}
+                        {{> eris_node_type}}
+                    {{/each}}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-default">Create</button>
+        </form>
+    </div>
+</template>
+
+<template name="eris_node_type">
+    <option>{{eris_node_type}}</option>
+</template>
+
+<template name="new_blockchain">
+    <div>
+        <h1>Start a new blockchain</h1>
+        <form id="new-blockchain" class="form-inline">
+            <div class="form-group">
+                <label for="name">Blockchain name</label>
+                <input type="text" class="form-control" id="name" placeholder="newchain">
+            </div>
+            <button type="submit" class="btn btn-default">Create</button>
+        </form>
+    </div>
+</template>
+
+<template name="eris_transactions">
+    <h1>Tokens transactions</h1>
+    <form class="form-inline" id="filter-tx">
+        <div class="form-group">
+            <input type="text" class="form-control" name="chain" placeholder="filter by chain name">
+            <input type="text" class="form-control" name="sender" placeholder="filter by sender">
+            <input type="text" class="form-control" name="receiver" placeholder="filter by receiver">
+            <input type="submit" value="Filter">
+            <input type="reset" value="Reset">
+        </div>
+    </form>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Chain</th>
+            <th>Hash</th>
+            <th>Block</th>
+            <th>Time</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each transactions}}
+            {{> token_transaction}}
+        {{/each}}
+        </tbody>
+    </table>
+</template>
+
+<template name="token_transaction">
+    {{#each tx in block.data.txs}}
+        {{#if tx.[1].outputs.[0].amount}}
+            <tr>
+                <td>{{block.header.chain_id}}</td>
+                <td>{{block_meta.hash}}</td>
+                <td>{{block_meta.header.height}}</td>
+                <td>{{block_meta.header.time}}</td>
+                <td>{{tx.[1].inputs.[0].address}}</td>
+                <td>{{tx.[1].outputs.[0].address}}</td>
+                <td>{{tx.[1].outputs.[0].amount}}</td>
+            </tr>
+        {{/if}}
+    {{/each}}
+</template>

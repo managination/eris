@@ -50,12 +50,21 @@ VBoxManage list vms
 # only running VMs
 VBoxManage list runningvms
 ```
-# Make a copy of VM
-It is possible to make a clone of existing VM:
+# Make a copy of VM 
+## Full clone
+This result in a full andabsolutely independent copy of source VM. 
 ```bash
 VBoxManage clonevm  Win7Pro_Eris --register --name Win7Pro_Eris_copy
 VBoxManage startvm Win7Pro_Eris_copy --type headless
 ```
+## Linked clone
+Linked clones are created only from a snapshot copy of the source VM. This saves host system HDD space, because source and clone share the same base drive image. Linked clones can safely delete just as any other VM without impact on the source system.
+```bash
+vboxmanage snapshot Win7Pro_Eris take ExampleSnapshot
+vboxmanage clonevm Win7Pro_Eris --snapshot ExampleSnapshot --options link --register --name Win7Pro_Eris_linked_clone
+VBoxManage startvm Win7Pro_Eris_linked_clone --type headless
+```
+
 # Delete VM
 ```bash
 VBoxManage unregistervm Win7Pro_Eris_copy --delete

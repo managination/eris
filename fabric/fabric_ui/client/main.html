@@ -1,0 +1,32 @@
+<head>
+  <title>webui</title>
+</head>
+
+<body>
+
+  {{> sendform}}
+  {{> transactions}}
+</body>
+
+
+<template name="sendform">
+  <div>
+    <form class="send"> 
+      <input type="text" name="from" placeholder="From" />
+      <input type="text" name="to" placeholder="To" />
+      <input type="text" name="amount" placeholder="10" />
+      <input type="submit" /> 
+    </form>
+  </div>
+</template>
+
+<template name="transactions">
+  <div>
+  <ul>
+    <li>{{ get_txid }}</li>
+    <li>From {{ get_from }}</li>
+    <li>To {{ get_to }}</li>
+    <li>{{ get_amount }} coins</li>
+  </ul>
+  </div>
+</template>
